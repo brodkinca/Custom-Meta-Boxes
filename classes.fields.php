@@ -993,6 +993,18 @@ class CMB_Date_Timestamp_Field extends CMB_Field {
  */
 class CMB_Datetime_Timestamp_Field extends CMB_Field {
 
+	private $timezone;
+
+	public function __construct( $name, $title, array $values, $args = array() )
+	{
+		parent::__construct( $name, $title, $values, $args );
+
+		// Create Timezone Object
+		$timezone_string = get_option( 'timezone_string' );
+		if ( $timezone_string )
+			$this->timezone = new DateTimeZone( $timezone_string );
+	}
+
 	/**
 	 * Enqueue all scripts required by the field.
 	 *
