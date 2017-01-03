@@ -6,13 +6,15 @@ CMB.addCallbackForClonedField( ['CMB_Date_Field', 'CMB_Time_Field', 'CMB_Date_Ti
 
 	// Reinitialize all the datepickers
 	newT.find( '.cmb_datepicker' ).each(function () {
-		jQuery( this ).attr( 'id', '' ).removeClass( 'hasDatepicker' ).removeData( 'datepicker' ).unbind().datepicker();
+		jQuery( this ).attr( 'id', '' ).removeClass( 'hasDatepicker' ).removeData( 'datepicker' ).unbind().datepicker({
+			dateFormat: 'mm/dd/yy'
+		});
 	} );
 
 	// Reinitialize all the timepickers.
 	newT.find( '.cmb_timepicker' ).each( function () {
 		jQuery( this ).timePicker({
-			startTime: "00:00",
+			startTime: "14:00",
 			endTime: "23:30",
 			show24Hours: false,
 			separator: ':',
@@ -26,7 +28,9 @@ CMB.addCallbackForInit( function() {
 
 	// Datepicker
 	jQuery( '.cmb_datepicker' ).each( function () {
-		jQuery( this ).datepicker();
+		jQuery( this ).datepicker({
+			dateFormat: 'mm/dd/yy'
+		});
 	});
 
 	// Wrap date picker in class to narrow the scope of jQuery UI CSS and prevent conflicts
@@ -35,7 +39,7 @@ CMB.addCallbackForInit( function() {
 	// Timepicker
 	jQuery( '.cmb_timepicker' ).each( function () {
 		jQuery( this ).timePicker({
-			startTime: "00:00",
+			startTime: "14:00",
 			endTime: "23:30",
 			show24Hours: false,
 			separator: ':',

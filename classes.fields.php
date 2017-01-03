@@ -972,7 +972,7 @@ class CMB_Date_Timestamp_Field extends CMB_Field {
 	public function parse_save_values() {
 		
 		foreach( $this->values as &$value ) {
-			$datetime = DateTime::createFromFormat( 'm/d/Y', $value, $this->timezone );
+			$datetime = new DateTime($value, $this->timezone );
 			if ( $datetime ) {
 				$datetime->setTime(0, 0);
 				$value = $datetime->format( 'U' );
@@ -1050,10 +1050,10 @@ class CMB_Datetime_Timestamp_Field extends CMB_Field {
 				unset( $this->values[$key] );
 			} else {
 				if ( empty( $value['time'] ) ) {
-					$datetime = DateTime::createFromFormat( 'm/d/Y', $value['date'], $this->timezone );
+					$datetime = new DateTime($value['date'], $this->timezone );
 					$datetime->setTime(0, 0);
 				} else {
-					$datetime = DateTime::createFromFormat( 'm/d/Y h:i a', $value['date'] . ' ' . $value['time'], $this->timezone );
+					$datetime = new DateTime($value['date'] . ' ' . $value['time'], $this->timezone );
 				}
 
 				if ( $datetime )
