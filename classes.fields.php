@@ -974,7 +974,8 @@ class CMB_Date_Timestamp_Field extends CMB_Field {
 		foreach( $this->values as &$value ) {
 			$datetime = new DateTime($value, $this->timezone );
 			if ( $datetime ) {
-				$datetime->setTime(0, 0);
+				$datetime->setTimezone( $this->timezone );
+				$datetime->modify('-3 hours');
 				$value = $datetime->format( 'U' );
 			}
 		}
