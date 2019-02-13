@@ -961,7 +961,7 @@ class CMB_Date_Timestamp_Field extends CMB_Field {
 		if ( $this->value )
 			$datetime->setTimestamp( $this->value );
 
-		?>	
+		?>
 		<input <?php $this->id_attr(); ?> <?php $this->boolean_attr(); ?> <?php $this->class_attr( 'cmb_text_small cmb_datepicker' ); ?> type="text" <?php $this->name_attr(); ?>  value="<?php echo $this->value ? esc_attr( $datetime->format( 'm/d/Y' ) ) : '' ?>" />
 
 	<?php }
@@ -970,18 +970,18 @@ class CMB_Date_Timestamp_Field extends CMB_Field {
 	 * Convert values into UNIX time values and sort.
 	 */
 	public function parse_save_values() {
-		
+
 		foreach( $this->values as &$value ) {
 			$datetime = new DateTime($value, $this->timezone );
 			if ( $datetime ) {
 				$datetime->setTimezone( $this->timezone );
-				$datetime->modify('-3 hours');
+				$datetime->modify('0 minutes');
 				$value = $datetime->format( 'U' );
 			}
 		}
 
 		sort( $this->values );
-	
+
 	}
 }
 
@@ -1024,19 +1024,19 @@ class CMB_Datetime_Timestamp_Field extends CMB_Field {
 	/**
 	 * Print out field HTML.
 	 */
-	public function html() { 
+	public function html() {
 
 		$datetime = new DateTime();
 		$datetime->setTimezone( $this->timezone );
 		if ( $this->value )
 			$datetime->setTimestamp( $this->value );
 
-		?>		
+		?>
 		<input <?php $this->id_attr('date'); ?> <?php $this->boolean_attr(); ?> <?php $this->class_attr( 'cmb_text_small cmb_datepicker' ); ?> type="text" <?php $this->name_attr( '[date]' ); ?>  value="<?php echo $this->value ? esc_attr( $datetime->format( 'm/d/Y' ) ) : '' ?>" />
 		<input <?php $this->id_attr('time'); ?> <?php $this->boolean_attr(); ?> <?php $this->class_attr( 'cmb_text_small cmb_timepicker' ); ?> type="text" <?php $this->name_attr( '[time]' ); ?> value="<?php echo $this->value ? esc_attr( $datetime->format( 'h:i a' ) ) : '' ?>" />
 		<abbr title="Time Zone: <?php echo str_replace('_', ' ', $datetime->format('e')) ?>"><?php echo $datetime->format('T') ?></abbr>
-		<?php 
-	
+		<?php
+
 	}
 
 	/**
@@ -1045,7 +1045,7 @@ class CMB_Datetime_Timestamp_Field extends CMB_Field {
 	public function parse_save_values() {
 
 		// Convert all [date] and [time] values to a unix timestamp.
-		// If date is empty, assume delete. If time is empty, assume midnight. 
+		// If date is empty, assume delete. If time is empty, assume midnight.
 		foreach( $this->values as $key => &$value ) {
 			if ( empty( $value['date'] ) ) {
 				unset( $this->values[$key] );
